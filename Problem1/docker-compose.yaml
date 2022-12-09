@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  frontend:
+    build: ./fe
+    tty: true
+    ports:
+      - "3000:3000"
+    volumes: 
+      - ./fe/src:/usr/app/fe/src
+    command: yarn start
+
+  # php:
+  #   build:
+  #     context: ./php
+  #   ports:
+  #     - 8080:80
+  #   volumes:
+  #     - ./php:/var/www/html
+
+  node:
+    build: ./node
+    tty: true
+    ports:
+      - 8080:8080
+    volumes:
+      - ./node/index.js:/usr/app/be/index.js
+    working_dir: /usr/app/be
+    command: node index.js
